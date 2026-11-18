@@ -24,8 +24,7 @@ def drag(msto,event):
         msto.player.going=True
         msto.drag=False
         take=pygame.Vector2(pygame.mouse.get_pos())
-        msto.player.speed=pygame.math.Vector2.magnitude(take)*0.01
-        msto.player.direction=pygame.math.Vector2.normalize(msto.player.pos-take)
+        msto.player.speedvector=pygame.math.Vector2(msto.player.pos-take)*0.1
 def drawtail(msto):
     msto.tails.append(Tail(msto.player.pos,msto.player.radius))
     for i in msto.tails:
@@ -46,11 +45,19 @@ def makeplanet(msto,csto):
         for i in range (0,random.randint(9,15)):
             radius=random.randint(30,70)
             x=random.choice(locatex)
-            y=random.choice(locatex)
-            msto.planets.append(Planet(radius,x,y))
-            for i in range(x-radius-30,x+radius+30):
+            y=random.choice(locatey)
+            GM=random.randint(3000,12000)
+            msto.GMpos.append(pygame.Vector2(x,y))
+            msto.GMs.append(GM)
+            msto.planets.append(Planet(radius,x,y,GM))
+            for i in range(x-radius-110,x+radius+111):
                 if i in locatex: locatex.remove(i)
-            for i in range(y-radius-30,y+radius+30):
+            for i in range(y-radius-110,y+radius+111):
                 if i in locatey: locatey.remove(i)
             if len(locatex)==0 or len(locatey)==0: break
         csto.rendermap=False
+def gravitationalforce(msto,dt):
+    if msto.player.going:
+        for i in msto.planets:
+            msto.player.speedvector+=i.GM/pygame.math.Vector2.magnitude_squared(i.pos-msto.player.pos)*dt*(i.pos-msto.player.pos)
+                

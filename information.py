@@ -23,12 +23,12 @@ class Player:
     def __init__(self):
         self.pos=pygame.Vector2(500,500)
         self.m=1
-        self.direction=pygame.Vector2(0,0)
-        self.speed=0.3
+        self.speedvector=pygame.Vector2(0,0)
+        self.speedratio=0.3
         self.going=False
         self.radius=10
     def draw(self):
-        self.pos+=self.direction*self.speed
+        self.pos+=self.speedvector*self.speedratio
         if self.going: pygame.draw.circle(screen,(54,149,245),self.pos,self.radius)
         else: pygame.draw.circle(screen,(125,125,125),self.pos,self.radius)
 class Tail:
@@ -39,13 +39,14 @@ class Tail:
         self.radius-=dt*50
         pygame.draw.circle(screen,(54,149,245),self.pos,max(0,int(self.radius)))
 class Planet:
-    def __init__(self,radius,x,y):
+    def __init__(self,radius,x,y,GM):
         self.radius=radius
         self.pos=pygame.Vector2(x,y)
-        self.GM=random.randint(30000,120000)
+        self.GM=GM
         self.color=(random.randint(100,255),random.randint(100,255),random.randint(100,255))
     def draw(self):
         pygame.draw.circle(screen,self.color,self.pos,self.radius)
+        pygame.draw.circle(screen,self.color,self.pos,self.GM/100,1)
         
 
         
