@@ -11,6 +11,7 @@ transparentscreen=pygame.Surface((1400,700), pygame.SRCALPHA)
 pygame.display.set_caption('Lost Soul')
 clock=pygame.time.Clock()
 
+msto=fun.Mapstore()
 csto=fun.Constore()
 
 #game loop
@@ -19,10 +20,11 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-        fun.drag(csto,event)
-    fun.drawtail(csto)
+        fun.drag(msto,event)
+    fun.makeplanet(msto,csto)
+    fun.drawtail(msto)
     pygame.draw.circle(screen,(225,0,0),(70,70),50)
-    fun.drawgame(csto,dt)
+    fun.drawgame(msto,dt)
     
     
     

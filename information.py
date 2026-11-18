@@ -7,12 +7,17 @@ pygame.font.init()
 screen=pygame.display.set_mode((1400,700))
 transparentscreen=pygame.Surface((1400,700), pygame.SRCALPHA)
 
-
 class Constore:
+    def __init__(self):
+        self.rendermap=True
+class Mapstore:
     def __init__(self):
         self.player=Player()
         self.tails=[]
         self.drag=False
+        self.planets=[]
+        self.GMpos=[]
+        self.GMs=[]
 
 class Player:
     def __init__(self):
@@ -33,5 +38,14 @@ class Tail:
     def draw(self,dt):
         self.radius-=dt*50
         pygame.draw.circle(screen,(54,149,245),self.pos,max(0,int(self.radius)))
+class Planet:
+    def __init__(self,radius,x,y):
+        self.radius=radius
+        self.pos=pygame.Vector2(x,y)
+        self.GM=random.randint(30000,120000)
+        self.color=(random.randint(100,255),random.randint(100,255),random.randint(100,255))
+    def draw(self):
+        pygame.draw.circle(screen,self.color,self.pos,self.radius)
+        
 
         
