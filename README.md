@@ -15,7 +15,7 @@ this project was made with pygame and physics
 - **Press P anytime** to see will next map can satisfy you
 
 ## aim?
-No winning or losing, just pur chaos. Your goal is to view interestings trajectories by gravity
+No winning or losing, just pur chaos. Your goal is to view interesting trajectories by gravity
 
 ## planet
 Each planet exerts a gravitational pull on the star following Newton's law of universal gravitation:
