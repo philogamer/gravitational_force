@@ -26,7 +26,9 @@ def drag(msto,event):
         msto.player.going=True
         msto.drag=False
         take=pygame.Vector2(pygame.mouse.get_pos())
-        msto.player.speedvector=pygame.math.Vector2(msto.player.pos-take)*0.1
+        if pygame.math.Vector2.magnitude(msto.player.pos-take)>200:
+            take=msto.player.pos-pygame.math.Vector2.normalize(msto.player.pos-take)*200
+        msto.player.speedvector=pygame.math.Vector2(msto.player.pos-take)*0.3
 def drawtail(msto):
     msto.tails.append(Tail(msto.player.pos,msto.player.radius))
     for i in msto.tails:
@@ -35,7 +37,9 @@ def drawtail(msto):
 def drawdrag(msto):
     if msto.drag and not msto.player.going:
         pos1=pygame.Vector2(pygame.mouse.get_pos())
-        sidescale=pygame.math.Vector2.normalize(msto.player.pos-pos1)*msto.player.radius
+        if pygame.math.Vector2.magnitude(msto.player.pos-pos1)>200:
+            pos1=msto.player.pos-pygame.math.Vector2.normalize(msto.player.pos-pos1)*200
+        sidescale=pygame.math.Vector2.normalize(msto.player.pos-pos1)*(msto.player.radius-1)
         side=pygame.math.Vector2.rotate(sidescale,90)
         pos2=msto.player.pos+side
         pos3=msto.player.pos-side
