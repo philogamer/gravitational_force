@@ -50,7 +50,7 @@ def makeplanet(msto,csto):
         locatex=list(range(80,1321))
         locatey=list(range(80,621))
         radiusgacha=list(range(30,71))
-        while len(msto.planets)<=random.randint(9,15):
+        while len(msto.planets)<=random.randint(7,11):
             x=random.choice(locatex)
             y=random.choice(locatey)
             radius=random.choice(radiusgacha)
@@ -111,3 +111,7 @@ def stay(msto):
             r=pygame.math.Vector2.normalize(i.pos-msto.player.pos)*(msto.player.radius+i.radius)
             msto.player.pos=i.pos-r
             msto.player.going=False
+def removeoutside(msto):
+    for i in msto.planets:
+        if i.x<0 or i.y<0 or i.y>1400 or i.y<700:
+            msto.planets.remove(i)

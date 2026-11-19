@@ -27,6 +27,7 @@ while True:
     if csto.rendermap:
         msto=fun.Mapstore()
     fun.makeplanet(msto,csto)
+    fun.removeoutside(msto)
     fun.stay(msto)
     fun.gravitationalforce(msto,dt)
     fun.drawtail(msto)
