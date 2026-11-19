@@ -113,5 +113,5 @@ def stay(msto):
             msto.player.going=False
 def removeoutside(msto):
     for i in msto.planets:
-        if i.x<0 or i.y<0 or i.y>1400 or i.y<700:
+        if i.x<0 or i.y<0 or i.x>1400 or i.y>700:
             msto.planets.remove(i)
