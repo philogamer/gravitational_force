@@ -28,7 +28,7 @@ def drag(msto,event):
         take=pygame.Vector2(pygame.mouse.get_pos())
         if pygame.math.Vector2.magnitude(msto.player.showpos-take)>200:
             take=msto.player.showpos-pygame.math.Vector2.normalize(msto.player.showpos-take)*200
-        msto.player.speedvector=pygame.math.Vector2(msto.player.showpos-take)*0.5
+        msto.player.speedvector=pygame.math.Vector2(msto.player.showpos-take)*0.7
 def drawtail(msto):
     msto.tails.append(Tail(msto.player.showpos,msto.player.radius))
     for i in msto.tails:
