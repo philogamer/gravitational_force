@@ -51,6 +51,8 @@ def makeplanet(msto,csto):
         locatey=list(range(80,621))
         radiusgacha=list(range(30,71))
         while len(msto.planets)<=random.randint(7,11):
+            move=False
+            skip=False
             x=random.choice(locatex)
             y=random.choice(locatey)
             radius=random.choice(radiusgacha)
@@ -65,6 +67,12 @@ def makeplanet(msto,csto):
                         move=True
                         endx=i.x
                         endy=i.y
+                        for j in msto.planets:
+                            if i.pos==j.pos: break
+                            dis=j.pos-pos
+                            if pygame.math.Vector2.magnitude(dis)<(radius+j.radius+20):
+                                radius=int(abs(pygame.math.Vector2.magnitude(dis)-j.radius-20))
+                                if radius<30: skip=True
             if move:
                 x=int(pos.x)
                 y=int(pos.y)
@@ -84,7 +92,7 @@ def makeplanet(msto,csto):
                     for i in range(endy,y):
                         if i in locatey:
                             locatey.remove(i)
-            msto.planets.append(Planet(radius,x,y,GM))
+            if not skip: msto.planets.append(Planet(radius,x,y,GM))
             if x in locatex: locatex.remove(x)
             if y in locatey: locatey.remove(y)
             if len(locatex)==0 or len(locatey)==0: break
