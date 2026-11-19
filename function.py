@@ -46,10 +46,14 @@ def makeplanet(msto,csto):
         locatey=list(range(80,621))
         radiusgacha=list(range(30,71))
         while len(msto.planets)<=9:
+            testx=[]
+            testy=[]
             radius=random.choice(radiusgacha)
             GM=random.randint(3000,12000)
-            testx=list(range(80,1321))
-            testy=list(range(80,621))
+            for i in locatex:
+                testx.append(i)
+            for i in locatey:
+                testy.append(i)
             x=random.choice(testx)
             y=random.choice(testy)
             while x-radius not in locatex or x+radius not in locatex or y-radius not in locatey or y+radius not in locatey:
@@ -66,7 +70,7 @@ def makeplanet(msto,csto):
                     if i in locatex: locatex.remove(i)
                 for i in range(y-radius-10,y+radius+10):
                     if i in locatey: locatey.remove(i)
-            if len(locatex)==0 or len(locatey)==0: break
+            if len(locatex)==0 or len(locatey)==0 or len(radiusgacha)==0: break
         star(msto)
         csto.rendermap=False
 def gravitationalforce(msto,dt):
@@ -83,3 +87,10 @@ def star(msto):
         y=random.choice(testy)
         testy.remove(y)
         msto.stars.append(Planet(2,x,y,0))
+def stay(msto):
+    for i in msto.planets:
+        if pygame.math.Vector2.magnitude(i.pos-msto.player.pos)<=i.radius:
+            msto.player.speedvector=pygame.Vector2(0,0)
+            r=pygame.math.Vector2.normalize(i.pos-msto.player.pos)*(msto.player.radius+i.radius)
+            msto.player.pos=i.pos-r
+            msto.player.going=False

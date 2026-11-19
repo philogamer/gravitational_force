@@ -22,6 +22,7 @@ while True:
             pygame.quit()
         fun.drag(msto,event)
     fun.makeplanet(msto,csto)
+    fun.stay(msto)
     fun.gravitationalforce(msto,dt)
     fun.drawtail(msto)
     pygame.draw.circle(screen,(225,0,0),(70,70),50)
