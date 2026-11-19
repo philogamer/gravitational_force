@@ -11,6 +11,8 @@ transparentscreen=pygame.Surface((1400,700), pygame.SRCALPHA)
 
 def drawgame(msto,dt):
     screen.fill((0,0,0))
+    for i in msto.stars:
+        i.draw()
     for i in msto.planets:
         i.draw()
     drawdrag(msto)
@@ -40,24 +42,43 @@ def drawdrag(msto):
         pygame.draw.polygon(screen,(225,225,225),(pos1,pos2,pos3))
 def makeplanet(msto,csto):
     if csto.rendermap:
-        locatex=list(range(80,1320))
-        locatey=list(range(80,620))
-        for i in range (0,random.randint(9,15)):
-            radius=random.randint(30,70)
-            x=random.choice(locatex)
-            y=random.choice(locatey)
+        locatex=list(range(80,1321))
+        locatey=list(range(80,621))
+        radiusgacha=list(range(30,71))
+        while len(msto.planets)<=9:
+            radius=random.choice(radiusgacha)
             GM=random.randint(3000,12000)
-            msto.GMpos.append(pygame.Vector2(x,y))
-            msto.GMs.append(GM)
-            msto.planets.append(Planet(radius,x,y,GM))
-            for i in range(x-radius-110,x+radius+111):
+            testx=list(range(80,1321))
+            testy=list(range(80,621))
+            x=random.choice(testx)
+            y=random.choice(testy)
+            while x-radius not in locatex or x+radius not in locatex or y-radius not in locatey or y+radius not in locatey:
+                x=random.choice(testx)
+                if x-radius not in locatex or x+radius not in locatex: testx.remove(x)
+                y=random.choice(testy)
+                if y-radius not in locatey or y+radius not in locatey: testy.remove(y)
+                if len(testx)==0 or len(testy)==0:
+                    radiusgacha.remove(radius)
+                    break
+            if  len(testx)!=0 and len(testy)!=0: msto.planets.append(Planet(radius,x,y,GM))
+            for i in range(x-radius-10,x+radius+10):
                 if i in locatex: locatex.remove(i)
-            for i in range(y-radius-110,y+radius+111):
+            for i in range(y-radius-10,y+radius+10):
                 if i in locatey: locatey.remove(i)
             if len(locatex)==0 or len(locatey)==0: break
+        star(msto)
         csto.rendermap=False
 def gravitationalforce(msto,dt):
     if msto.player.going:
         for i in msto.planets:
             msto.player.speedvector+=i.GM/pygame.math.Vector2.magnitude_squared(i.pos-msto.player.pos)*dt*(i.pos-msto.player.pos)
-                
+def star(msto):
+    num=random.randint(20,40)
+    testx=list(range(80,1321))
+    testy=list(range(80,621))
+    for i in range(0,num+1):
+        x=random.choice(testx)
+        testx.remove(x)
+        y=random.choice(testy)
+        testy.remove(y)
+        msto.stars.append(Planet(2,x,y,0))

@@ -16,8 +16,7 @@ class Mapstore:
         self.tails=[]
         self.drag=False
         self.planets=[]
-        self.GMpos=[]
-        self.GMs=[]
+        self.stars=[]
 
 class Player:
     def __init__(self):
@@ -46,7 +45,7 @@ class Planet:
         self.color=(random.randint(100,255),random.randint(100,255),random.randint(100,255))
     def draw(self):
         pygame.draw.circle(screen,self.color,self.pos,self.radius)
-        pygame.draw.circle(screen,self.color,self.pos,self.GM/100,1)
+        pygame.draw.circle(screen,self.color,self.pos,self.GM/50,1)
         
 
         
