@@ -20,7 +20,8 @@ class Mapstore:
 
 class Player:
     def __init__(self):
-        self.pos=pygame.Vector2(500,500)
+        self.pos=pygame.Vector2(700,350)
+        self.showpos=pygame.Vector2(700,350)
         self.m=1
         self.speedvector=pygame.Vector2(0,0)
         self.speedratio=0.3
@@ -28,13 +29,15 @@ class Player:
         self.radius=10
     def draw(self):
         self.pos+=self.speedvector*self.speedratio
-        if self.going: pygame.draw.circle(screen,(54,149,245),self.pos,self.radius)
-        else: pygame.draw.circle(screen,(125,125,125),self.pos,self.radius)
+        if self.going: pygame.draw.circle(screen,(54,149,245),self.showpos,self.radius)
+        else: pygame.draw.circle(screen,(125,125,125),self.showpos,self.radius)
 class Tail:
     def __init__(self,pos,radius):
         self.pos=pygame.Vector2(pos)
+        self.speedratio=0.1
         self.radius=radius
-    def draw(self,dt):
+    def draw(self,dt,speedvector):
+        self.pos-=speedvector*self.speedratio
         self.radius-=dt*50
         pygame.draw.circle(screen,(54,149,245),self.pos,max(0,int(self.radius)))
 class Planet:
@@ -47,12 +50,12 @@ class Planet:
         self.a=random.randint(100,255)
         self.b=random.randint(100,255)
         self.c=random.randint(100,255)
-    def draw(self):
+    def draw(self,pos):
         for i in range(self.radius,0,-1):
-            pygame.draw.circle(transparentscreen,(self.a,self.b,self.c,3*i),self.pos,i)
+            pygame.draw.circle(transparentscreen,(self.a,self.b,self.c,3*i),self.pos+pos,i)
         if self.radius==2:
-            pygame.draw.circle(transparentscreen,(self.a,self.b,self.c,255),self.pos,self.radius)
-        pygame.draw.circle(transparentscreen,(self.c,self.a,self.b,255),self.pos,self.GM/50,1)
+            pygame.draw.circle(transparentscreen,(self.a,self.b,self.c,255),self.pos+pos,self.radius)
+        pygame.draw.circle(transparentscreen,(self.c,self.a,self.b,255),self.pos+pos,self.GM/50,1)
         
 
         

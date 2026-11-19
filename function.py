@@ -11,13 +11,13 @@ def drawgame(msto,dt):
     screen.fill((0,0,0))
     transparentscreen.fill((0,0,0,210))
     for i in msto.stars:
-        i.draw()
+        i.draw(msto.player.showpos-msto.player.pos)
     drawdrag(msto)
     for i in msto.planets:
-        i.draw()
+        i.draw(msto.player.showpos-msto.player.pos)
     screen.blit(transparentscreen)
     for i in msto.tails:
-        i.draw(dt)
+        i.draw(dt,msto.player.speedvector)
     msto.player.draw()
 def drag(msto,event):
     if event.type==pygame.MOUSEBUTTONDOWN and event.button==1:
@@ -26,27 +26,26 @@ def drag(msto,event):
         msto.player.going=True
         msto.drag=False
         take=pygame.Vector2(pygame.mouse.get_pos())
-        if pygame.math.Vector2.magnitude(msto.player.pos-take)>200:
-            take=msto.player.pos-pygame.math.Vector2.normalize(msto.player.pos-take)*200
-        msto.player.speedvector=pygame.math.Vector2(msto.player.pos-take)*0.3
+        if pygame.math.Vector2.magnitude(msto.player.showpos-take)>200:
+            take=msto.player.showpos-pygame.math.Vector2.normalize(msto.player.showpos-take)*200
+        msto.player.speedvector=pygame.math.Vector2(msto.player.showpos-take)*0.3
 def drawtail(msto):
-    msto.tails.append(Tail(msto.player.pos,msto.player.radius))
+    msto.tails.append(Tail(msto.player.showpos,msto.player.radius))
     for i in msto.tails:
         if i.radius<=0:
             msto.tails.remove(i)
 def drawdrag(msto):
     if msto.drag and not msto.player.going:
         pos1=pygame.Vector2(pygame.mouse.get_pos())
-        if pygame.math.Vector2.magnitude(msto.player.pos-pos1)>200:
-            pos1=msto.player.pos-pygame.math.Vector2.normalize(msto.player.pos-pos1)*200
-        sidescale=pygame.math.Vector2.normalize(msto.player.pos-pos1)*(msto.player.radius-1)
+        if pygame.math.Vector2.magnitude(msto.player.showpos-pos1)>200:
+            pos1=msto.player.showpos-pygame.math.Vector2.normalize(msto.player.showpos-pos1)*200
+        sidescale=pygame.math.Vector2.normalize(msto.player.showpos-pos1)*(msto.player.radius-1)
         side=pygame.math.Vector2.rotate(sidescale,90)
-        pos2=msto.player.pos+side
-        pos3=msto.player.pos-side
+        pos2=msto.player.showpos+side
+        pos3=msto.player.showpos-side
         pygame.draw.polygon(screen,(225,225,225),(pos1,pos2,pos3))
 def makeplanet(msto,csto):
     if csto.rendermap:
-        move=False
         locatex=list(range(80,1321))
         locatey=list(range(80,621))
         radiusgacha=list(range(30,71))
