@@ -8,7 +8,7 @@ pygame.mixer.init()
 pygame.font.init()
 screen=pygame.display.set_mode((1400,700))
 transparentscreen=pygame.Surface((1400,700), pygame.SRCALPHA)
-pygame.display.set_caption('Lost Soul')
+pygame.display.set_caption('flyingstar')
 clock=pygame.time.Clock()
 
 msto=fun.Mapstore()
@@ -21,6 +21,11 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
         fun.drag(msto,event)
+        keys=pygame.key.get_pressed()
+        if keys[pygame.K_p] and not csto.rendermap:
+            csto.rendermap=True
+    if csto.rendermap:
+        msto=fun.Mapstore()
     fun.makeplanet(msto,csto)
     fun.stay(msto)
     fun.gravitationalforce(msto,dt)
