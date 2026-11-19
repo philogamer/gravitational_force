@@ -15,12 +15,12 @@ this project was made with pygame and physics
 - **Press P anytime** to see will next map can satisfy you
 
 ## aim?
-No winning or losing, just pur chaos. Your goal is to view interesting trajectories by gravity
+No winning or losing, just pure chaos. Your goal is to view interesting trajectories by gravity
 
 ## planet
 Each planet exerts a gravitational pull on the star following Newton's law of universal gravitation:
 (F = GMm/r²)
-- The **faint outer circle** around each planet visualizes its gravitational influence (bigger circle = stronger pull).
+- The **faint outer circle** around each planet visualizes its mass (bigger circle = stronger gravitational force), if you can't see it just because the planet is bigger than the mass very much
 - Only planets **currently visible on screen** affect the star.
 - If the object touches a planet, it **stops at the planet's edge** and now you can drag it again
 
