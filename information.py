@@ -39,6 +39,8 @@ class Tail:
         pygame.draw.circle(screen,(54,149,245),self.pos,max(0,int(self.radius)))
 class Planet:
     def __init__(self,radius,x,y,GM):
+        self.x=x
+        self.y=y
         self.radius=radius
         self.pos=pygame.Vector2(x,y)
         self.GM=GM

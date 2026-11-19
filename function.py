@@ -46,35 +46,48 @@ def drawdrag(msto):
         pygame.draw.polygon(screen,(225,225,225),(pos1,pos2,pos3))
 def makeplanet(msto,csto):
     if csto.rendermap:
+        move=False
         locatex=list(range(80,1321))
         locatey=list(range(80,621))
         radiusgacha=list(range(30,71))
-        while len(msto.planets)<=9:
-            testx=[]
-            testy=[]
+        while len(msto.planets)<=random.randint(9,15):
+            x=random.choice(locatex)
+            y=random.choice(locatey)
             radius=random.choice(radiusgacha)
+            pos=pygame.Vector2(x,y)
             GM=random.randint(3000,12000)
-            for i in locatex:
-                testx.append(i)
-            for i in locatey:
-                testy.append(i)
-            x=random.choice(testx)
-            y=random.choice(testy)
-            while x-radius not in locatex or x+radius not in locatex or y-radius not in locatey or y+radius not in locatey:
-                x=random.choice(testx)
-                if x-radius not in locatex or x+radius not in locatex: testx.remove(x)
-                y=random.choice(testy)
-                if y-radius not in locatey or y+radius not in locatey: testy.remove(y)
-                if len(testx)==0 or len(testy)==0:
-                    radiusgacha.remove(radius)
-                    break
-            if  len(testx)!=0 and len(testy)!=0: 
-                msto.planets.append(Planet(radius,x,y,GM))
-                for i in range(x-radius-10,x+radius+10):
-                    if i in locatex: locatex.remove(i)
-                for i in range(y-radius-10,y+radius+10):
-                    if i in locatey: locatey.remove(i)
-            if len(locatex)==0 or len(locatey)==0 or len(radiusgacha)==0: break
+            if msto.planets:
+                for i in msto.planets:
+                    dis=i.pos-pos
+                    if pygame.math.Vector2.magnitude(dis)<(radius+i.radius+20):
+                        dis=pygame.math.Vector2.normalize(dis)*(radius+i.radius+21)
+                        pos=i.pos-dis
+                        move=True
+                        endx=i.x
+                        endy=i.y
+            if move:
+                x=int(pos.x)
+                y=int(pos.y)
+                if endx>x: 
+                    for i in range(x+1,endx):
+                        if i in locatex:
+                            locatex.remove(i)
+                elif endx<x: 
+                    for i in range(endx,x):
+                        if i in locatex:
+                            locatex.remove(i)
+                if endy>y: 
+                    for i in range(y+1,endy):
+                        if i in locatey:
+                            locatey.remove(i)
+                elif endy<y: 
+                    for i in range(endy,y):
+                        if i in locatey:
+                            locatey.remove(i)
+            msto.planets.append(Planet(radius,x,y,GM))
+            if x in locatex: locatex.remove(x)
+            if y in locatey: locatey.remove(y)
+            if len(locatex)==0 or len(locatey)==0: break
         star(msto)
         csto.rendermap=False
 def gravitationalforce(msto,dt):
