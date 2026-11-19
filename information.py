@@ -34,11 +34,11 @@ class Player:
 class Tail:
     def __init__(self,pos,radius):
         self.pos=pygame.Vector2(pos)
-        self.speedratio=0.1
+        self.speedratio=0.05
         self.radius=radius
     def draw(self,dt,speedvector):
         self.pos-=speedvector*self.speedratio
-        self.radius-=dt*50
+        self.radius-=dt*20
         pygame.draw.circle(screen,(54,149,245),self.pos,max(0,int(self.radius)))
 class Planet:
     def __init__(self,radius,x,y,GM):

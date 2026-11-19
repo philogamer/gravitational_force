@@ -22,12 +22,14 @@ while True:
             pygame.quit()
         fun.drag(msto,event)
         keys=pygame.key.get_pressed()
-        if keys[pygame.K_p] and not csto.rendermap:
+        if keys[pygame.K_n] and not csto.rendermap:
             csto.rendermap=True
+        if keys[pygame.K_p] and not csto.rendermap:
+            msto.player.going=False
+            msto.player.speedvector=pygame.Vector2(0,0)
     if csto.rendermap:
         msto=fun.Mapstore()
-    fun.makeplanet(msto,csto)
-    fun.removeoutside(msto)
+    fun.makeuniverse(msto,csto)
     fun.stay(msto)
     fun.gravitationalforce(msto,dt)
     fun.drawtail(msto)
