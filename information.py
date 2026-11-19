@@ -42,14 +42,15 @@ class Planet:
         self.radius=radius
         self.pos=pygame.Vector2(x,y)
         self.GM=GM
-        a=random.randint(100,255)
-        b=random.randint(100,255)
-        c=random.randint(100,255)
-        self.color=(a,b,c)
-        self.gravitycolor=(c,a,b)
+        self.a=random.randint(100,255)
+        self.b=random.randint(100,255)
+        self.c=random.randint(100,255)
     def draw(self):
-        pygame.draw.circle(screen,self.color,self.pos,self.radius)
-        pygame.draw.circle(screen,self.gravitycolor,self.pos,self.GM/50,1)
+        for i in range(self.radius,0,-1):
+            pygame.draw.circle(transparentscreen,(self.a,self.b,self.c,3*i),self.pos,i)
+        if self.radius==2:
+            pygame.draw.circle(transparentscreen,(self.a,self.b,self.c,255),self.pos,self.radius)
+        pygame.draw.circle(transparentscreen,(self.c,self.a,self.b,255),self.pos,self.GM/50,1)
         
 
         

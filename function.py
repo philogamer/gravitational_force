@@ -5,20 +5,20 @@ from information import *
 pygame.init()
 pygame.mixer.init()
 pygame.font.init()
-screen=pygame.display.set_mode((1400,700))
-transparentscreen=pygame.Surface((1400,700), pygame.SRCALPHA)
 
 
 def drawgame(msto,dt):
     screen.fill((0,0,0))
+    transparentscreen.fill((0,0,0,210))
     for i in msto.stars:
         i.draw()
+    drawdrag(msto)
     for i in msto.planets:
         i.draw()
-    drawdrag(msto)
+    screen.blit(transparentscreen)
     for i in msto.tails:
         i.draw(dt)
-    msto.player.draw()    
+    msto.player.draw()
 def drag(msto,event):
     if event.type==pygame.MOUSEBUTTONDOWN and event.button==1:
         msto.drag=True
