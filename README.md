@@ -33,7 +33,7 @@ Each map is generated with:
 - **Non-overlapping planet** algorithm to keep planets from stacking
 
 ## science
-This project simulates **Newtonian orbital mechanics** in real time:
+Simulate **Newtonian orbital mechanics** in real time:
 - Gravitational force is calculated using vector math (`pygame.math.Vector2`)
 - Velocity is integrated each frame based on the sum of all gravitational forces
 
