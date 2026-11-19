@@ -60,11 +60,12 @@ def makeplanet(msto,csto):
                 if len(testx)==0 or len(testy)==0:
                     radiusgacha.remove(radius)
                     break
-            if  len(testx)!=0 and len(testy)!=0: msto.planets.append(Planet(radius,x,y,GM))
-            for i in range(x-radius-10,x+radius+10):
-                if i in locatex: locatex.remove(i)
-            for i in range(y-radius-10,y+radius+10):
-                if i in locatey: locatey.remove(i)
+            if  len(testx)!=0 and len(testy)!=0: 
+                msto.planets.append(Planet(radius,x,y,GM))
+                for i in range(x-radius-10,x+radius+10):
+                    if i in locatex: locatex.remove(i)
+                for i in range(y-radius-10,y+radius+10):
+                    if i in locatey: locatey.remove(i)
             if len(locatex)==0 or len(locatey)==0: break
         star(msto)
         csto.rendermap=False
