@@ -1,5 +1,5 @@
 ### GRAVITATIONAL SIMULATION GAME
-Gravitational simulation game based on Newton's law (F = GMm/r²). Includes features for generating random map, non-colliding planets and calculating orbits using vectors.
+Gravitational simulation game based on Newton's law (F = GMm/r²). Includes features for generating random map, non-colliding planets, camera follow and calculating orbits using vectors.
 <img width="1748" height="915" alt="image" src="https://github.com/user-attachments/assets/35324dde-3a6f-495c-920b-6c8a39d8a67e" />
 
 
