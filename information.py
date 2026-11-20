@@ -34,7 +34,7 @@ class Player:
 class Tail:
     def __init__(self,pos,radius):
         self.pos=pygame.Vector2(pos)
-        self.speedratio=0.05
+        self.speedratio=0.03
         self.radius=radius
     def draw(self,dt,speedvector):
         self.pos-=speedvector*self.speedratio

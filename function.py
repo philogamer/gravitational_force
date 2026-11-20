@@ -47,7 +47,7 @@ def drawdrag(msto):
 def makeplanet(msto,csto,locatex,locatey):
     count=0
     radiusgacha=list(range(40,71))
-    while count<=random.randint(5,9):
+    while count<=random.randint(2,4):
         move=False
         skip=False
         x=random.choice(locatex)
