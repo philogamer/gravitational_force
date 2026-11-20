@@ -46,7 +46,7 @@ def drawdrag(msto):
         pygame.draw.polygon(screen,(225,225,225),(pos1,pos2,pos3))
 def makeplanet(msto,csto,locatex,locatey):
     count=0
-    radiusgacha=list(range(30,71))
+    radiusgacha=list(range(40,71))
     while count<=random.randint(5,9):
         move=False
         skip=False
@@ -69,7 +69,7 @@ def makeplanet(msto,csto,locatex,locatey):
                         dis=j.pos-pos
                         if pygame.math.Vector2.magnitude(dis)<(radius+j.radius+20):
                             radius=int(abs(pygame.math.Vector2.magnitude(dis)-j.radius-20))
-                            if radius<30: skip=True
+                            if radius<40: skip=True
         if move:
             x=int(pos.x)
             y=int(pos.y)
