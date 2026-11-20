@@ -1,6 +1,7 @@
 ### GRAVITATIONAL SIMULATION GAME
-Gravitational simulation game based on Newton's law (F = GMm/r²). Includes features for generating random map, non-colliding planets and calculating orbits using vectors.
-<img width="1749" height="907" alt="image" src="https://github.com/user-attachments/assets/e4144b68-637c-42bc-90c0-21180e333e60" />
+Gravitational simulation game based on Newton's law (F = GMm/r²). Includes features for generating random map, non-colliding planets, camera follow and calculating orbits using vectors.
+<img width="1748" height="915" alt="image" src="https://github.com/user-attachments/assets/35324dde-3a6f-495c-920b-6c8a39d8a67e" />
+
 
 ## HOW THIS WAS MADE
 this project was made with pygame and physics
