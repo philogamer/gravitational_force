@@ -7,25 +7,32 @@ this project was made with pygame and physics
 
 ## play?
 -**Control**:  Click, see your object, drag, then release
--**Resetmap**: press P
+-**Resetmap**: press N
+-**Pause to redrage**: press P
 
 ## rules
 - **Drag range is limited** — you can't slingshot infinitely far.
-- **You cannot re-aim while the star is flying.** No more fun if can!
-- **Press P anytime** to see will next map can satisfy you
+- **You can re-aim while the star is flying with P.** To test some new paths?
+- **Press N anytime** to see will next map can satisfy you
 
 ## aim?
 No winning or losing, just pure chaos. Your goal is to view interesting trajectories by gravity
+
+## camera follow
+The camera smoothly tracks the star as it moves through space.
 
 ## planet
 Each planet exerts a gravitational pull on the star following Newton's law of universal gravitation:
 (F = GMm/r²)
 - The **faint outer circle** around each planet visualizes its mass (bigger circle = stronger gravitational force), if you can't see it just because the planet is bigger than the mass very much
-- Only planets **currently visible on screen** affect the star.
+- There are planets **not currently visible on screen** affect the star.
 - If the object touches a planet, it **stops at the planet's edge** and now you can drag it again
 
+## open universe
+object can fly far beyond the original screen boundaries and still encounter new planets
+
 ## friendly reminder
-If the star flies off the edge of the screen, **don't close the game!**, the gravity will take it back for you
+If the star flies to somewhere with no planet, **don't close the game!**, the gravity will take it back for you
 
 ## map render
 Each map is generated with:
