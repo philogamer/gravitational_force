@@ -20,11 +20,12 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-        fun.drag(msto,event)
-        if event.type==pygame.MOUSEWHEEL:
+        fun.drag(msto,csto,event)
+        if event.type==pygame.MOUSEWHEEL and not msto.player.going:
             if event.y>0: csto.zoom+=1*dt
             elif event.y<0: csto.zoom-=1*dt
             if csto.zoom>1:csto.zoom=1
+            if csto.zoom<0.15:csto.zoom=0.15
         keys=pygame.key.get_pressed()
         if keys[pygame.K_n] and not csto.rendermap:
             csto.rendermap=True
@@ -39,7 +40,7 @@ while True:
     fun.gravitationalforce(msto,dt)
     fun.drawtail(msto)
     pygame.draw.circle(screen,(225,0,0),(70,70),50)
-    fun.drawgame(msto,dt)
+    fun.drawgame(msto,csto,dt)
     
     
     

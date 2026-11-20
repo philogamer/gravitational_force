@@ -7,22 +7,22 @@ pygame.mixer.init()
 pygame.font.init()
 
 
-def drawgame(msto,dt):
+def drawgame(msto,csto,dt):
     screen.fill((0,0,0))
     transparentscreen.fill((0,0,0,210))
     for i in msto.stars:
         i.draw(msto.player.showpos-msto.player.pos)
-    drawdrag(msto)
+    drawdrag(msto,csto)
     for i in msto.planets:
         i.draw(msto.player.showpos-msto.player.pos)
     screen.blit(transparentscreen)
     for i in msto.tails:
         i.draw(dt,msto.player.speedvector)
     msto.player.draw()
-def drag(msto,event):
+def drag(msto,csto,event):
     if event.type==pygame.MOUSEBUTTONDOWN and event.button==1:
         msto.drag=True
-    if event.type==pygame.MOUSEBUTTONUP and event.button==1 and not msto.player.going:
+    if event.type==pygame.MOUSEBUTTONUP and event.button==1 and not msto.player.going and csto.zoom==1:
         msto.player.going=True
         msto.drag=False
         take=pygame.Vector2(pygame.mouse.get_pos())
@@ -34,8 +34,8 @@ def drawtail(msto):
     for i in msto.tails:
         if i.radius<=0:
             msto.tails.remove(i)
-def drawdrag(msto):
-    if msto.drag and not msto.player.going:
+def drawdrag(msto,csto):
+    if msto.drag and not msto.player.going and csto.zoom==1:
         pos1=pygame.Vector2(pygame.mouse.get_pos())
         if pygame.math.Vector2.magnitude(msto.player.showpos-pos1)>200:
             pos1=msto.player.showpos-pygame.math.Vector2.normalize(msto.player.showpos-pos1)*200
@@ -135,6 +135,8 @@ def zoom(msto,csto):
         i.pos=take+r
     for i in msto.stars:
         r=(i.pos-take)/csto.previouszoom*csto.zoom
+        i.lightforstar=i.lightforstar/csto.previouszoom*csto.zoom
         i.pos=take+r
+    msto.player.radius=msto.player.radius/csto.previouszoom*csto.zoom
     csto.previouszoom=csto.zoom
                 

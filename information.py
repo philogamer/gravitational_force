@@ -53,11 +53,12 @@ class Planet:
         self.a=random.randint(100,255)
         self.b=random.randint(100,255)
         self.c=random.randint(100,255)
+        self.lightforstar=255
     def draw(self,pos):
         for i in range(round(self.radius),0,-1):
             pygame.draw.circle(transparentscreen,(self.a,self.b,self.c,3*i),self.pos+pos,i)
         if self.radius==2:
-            pygame.draw.circle(transparentscreen,(self.a,self.b,self.c,255),self.pos+pos,self.radius)
+            pygame.draw.circle(transparentscreen,(self.a,self.b,self.c,self.lightforstar),self.pos+pos,self.radius)
         pygame.draw.circle(transparentscreen,(self.c,self.a,self.b,255),self.pos+pos,self.mradius,1)
         
 
