@@ -126,20 +126,15 @@ def stay(msto):
             r=pygame.math.Vector2.normalize(i.pos-msto.player.pos)*(msto.player.radius+i.radius)
             msto.player.pos=i.pos-r
             msto.player.going=False
-def zoom(msto,event):
-    take=pygame.Vector2(msto.player.showpos)
-    if event.type==pygame.MOUSEWHEEL:
-        if event.y>0:
-            for i in msto.planets:
-                i.radius=int(i.radius/1.2)
-                i.mradius=int(i.radius/1.2)
-                r=(i.pos-take)/1.2
-                i.pos=take+r
-        if event.y<0:
-            for i in msto.planets:
-                i.radius=int(i.radius*1.2)
-                i.radius=int(i.radius*1.2)
-                r=(i.pos-take)*1.2
-                i.pos=take+r
-                
+def zoom(msto,csto):
+    take=pygame.Vector2(msto.player.pos)
+    for i in msto.planets:
+        i.radius=i.radius/csto.previouszoom*csto.zoom
+        i.mradius=i.mradius/csto.previouszoom*csto.zoom
+        r=(i.pos-take)/csto.previouszoom*csto.zoom
+        i.pos=take+r
+    for i in msto.stars:
+        r=(i.pos-take)/csto.previouszoom*csto.zoom
+        i.pos=take+r
+    csto.previouszoom=csto.zoom
                 

@@ -10,6 +10,8 @@ transparentscreen=pygame.Surface((1400,700), pygame.SRCALPHA)
 class Constore:
     def __init__(self):
         self.rendermap=True
+        self.previouszoom=1
+        self.zoom=1
 class Mapstore:
     def __init__(self):
         self.player=Player()
@@ -52,7 +54,7 @@ class Planet:
         self.b=random.randint(100,255)
         self.c=random.randint(100,255)
     def draw(self,pos):
-        for i in range(self.radius,0,-1):
+        for i in range(round(self.radius),0,-1):
             pygame.draw.circle(transparentscreen,(self.a,self.b,self.c,3*i),self.pos+pos,i)
         if self.radius==2:
             pygame.draw.circle(transparentscreen,(self.a,self.b,self.c,255),self.pos+pos,self.radius)
