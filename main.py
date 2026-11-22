@@ -2,6 +2,7 @@ import pygame
 import random
 import math
 import function as fun
+import sys
 
 pygame.init()
 pygame.mixer.init()
@@ -20,6 +21,7 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
+            sys.exit()
         fun.drag(msto,csto,event)
         if event.type==pygame.MOUSEWHEEL and not msto.player.going:
             if event.y>0: csto.zoom+=1*dt

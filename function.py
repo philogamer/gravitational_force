@@ -15,12 +15,12 @@ def drawgame(msto,csto,dt):
     drawdrag(msto,csto)
     for i in msto.planets:
         i.draw(msto.player.showpos-msto.player.pos)
-    screen.blit(transparentscreen)
     for i in msto.tails:
         i.draw(dt,msto.player.speedvector)
+    screen.blit(transparentscreen)
     msto.player.draw()
 def drag(msto,csto,event):
-    if event.type==pygame.MOUSEBUTTONDOWN and event.button==1:
+    if event.type==pygame.MOUSEBUTTONDOWN and event.button==1 and not msto.player.going and csto.zoom==1:
         msto.drag=True
     if event.type==pygame.MOUSEBUTTONUP and event.button==1 and not msto.player.going and csto.zoom==1:
         msto.player.going=True
@@ -46,7 +46,7 @@ def drawdrag(msto,csto):
         pygame.draw.polygon(screen,(225,225,225),(pos1,pos2,pos3))
 def makeplanet(msto,csto,locatex,locatey):
     count=0
-    radiusgacha=list(range(40,71))
+    radiusgacha=list(range(50,101))
     while count<=random.randint(2,4):
         move=False
         skip=False
@@ -139,4 +139,3 @@ def zoom(msto,csto):
         i.pos=take+r
     msto.player.radius=msto.player.radius/csto.previouszoom*csto.zoom
     csto.previouszoom=csto.zoom
-                
