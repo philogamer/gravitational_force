@@ -38,7 +38,7 @@ while True:
         msto=fun.Mapstore()
     fun.makeuniverse(msto,csto)
     fun.zoom(msto,csto)
-    fun.stay(msto)
+    #fun.stay(msto)
     fun.gravitationalforce(msto,dt)
     fun.drawtail(msto)
     pygame.draw.circle(screen,(225,0,0),(70,70),50)

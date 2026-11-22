@@ -44,7 +44,7 @@ class Tail:
         r = 255 if a < 0.6 else int(255 - (a - 0.6) / 0.4 * 155)
         g = int(50 + a / 0.5 * 205) if a < 0.5 else int(255 - (a - 0.5) / 0.5 * 205)
         b = 0 if a < 0.4 else int((a - 0.4) / 0.6 * 255)
-        self.radius-=dt*20
+        self.radius-=dt*15
         pygame.draw.circle(transparentscreen,(r,g,b,max(0,int(self.radius*25))),self.pos,max(0,int(self.radius)))
 class Planet:
     def __init__(self,radius,x,y,GM):
@@ -59,8 +59,9 @@ class Planet:
         self.c=random.randint(100,255)
         self.lightforstar=255
     def draw(self,pos):
+        a=self.radius/255
         for i in range(round(self.radius),0,-1):
-            pygame.draw.circle(transparentscreen,(self.a,self.b,self.c,int(2.5*i)),self.pos+pos,i)
+            pygame.draw.circle(transparentscreen,(self.a,self.b,self.c,a*i),self.pos+pos,i)
         if self.radius==2:
             pygame.draw.circle(transparentscreen,(self.a,self.b,self.c,self.lightforstar),self.pos+pos,self.radius)
         pygame.draw.circle(transparentscreen,(self.c,self.a,self.b,255),self.pos+pos,self.mradius,1)

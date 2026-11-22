@@ -47,6 +47,7 @@ def drawdrag(msto,csto):
 def makeplanet(msto,csto,locatex,locatey):
     count=0
     radiusgacha=list(range(50,101))
+    star(msto,locatex,locatey)
     while count<=random.randint(2,4):
         move=False
         skip=False
@@ -95,7 +96,6 @@ def makeplanet(msto,csto,locatex,locatey):
         if x in locatex: locatex.remove(x)
         if y in locatey: locatey.remove(y)
         if len(locatex)==0 or len(locatey)==0: break
-    star(msto,locatex,locatey)
         
 def makeuniverse(msto,csto):
     if csto.rendermap:    
@@ -139,3 +139,5 @@ def zoom(msto,csto):
         i.pos=take+r
     msto.player.radius=msto.player.radius/csto.previouszoom*csto.zoom
     csto.previouszoom=csto.zoom
+
+#def replay
